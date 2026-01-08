@@ -20,56 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSceneIndex = 0;
   let playbackInterval = null;
 
+  // 高清在线素材预设 (Unsplash Cyberpunk 风格)
+  const assetPool = [
+    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1545156521-77bd85671d30?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1000&auto=format&fit=crop"
+  ];
+
   // 预设生成阶段
   const phases = [
-    {
-      title: "正在提取关键词...",
-      detail: "分析文本语义中...",
-      progress: 10,
-      log: "语义引擎已启动...",
-    },
-    {
-      title: "正在编写剧本...",
-      detail: "构建 4 个核心分镜...",
-      progress: 25,
-      log: "剧本初步完成：深夜、赛博朋克、奔跑...",
-    },
-    {
-      title: "正在绘制分镜...",
-      detail: "场景 1: 全景俯瞰",
-      progress: 40,
-      log: "扩散模型 (Diffusion) 正在绘制场景 1...",
-    },
-    {
-      title: "正在绘制分镜...",
-      detail: "场景 2: 细节特写",
-      progress: 55,
-      log: "渲染光影追踪效果...",
-    },
-    {
-      title: "正在绘制分镜...",
-      detail: "场景 3: 动作捕捉",
-      progress: 70,
-      log: "动态帧插值计算中...",
-    },
-    {
-      title: "正在合成视频...",
-      detail: "添加全局特效与调色",
-      progress: 85,
-      log: "合成器正在进行 4K 降噪渲染...",
-    },
-    {
-      title: "正在同步音频...",
-      detail: "生成环境音效与背景音乐",
-      progress: 95,
-      log: "音频流对齐完成。",
-    },
-    {
-      title: "生成完成！",
-      detail: "准备播放...",
-      progress: 100,
-      log: "本地预览准备就绪。",
-    },
+    { title: "正在提取关键词...", detail: "分析文本语义中...", progress: 10, log: "语义引擎已启动..." },
+    { title: "正在编写剧本...", detail: "构建 4 个核心分镜...", progress: 25, log: "剧本初步完成：基于 AI 深度学习创作..." },
+    { title: "正在绘制分镜...", detail: "场景 1: 画质增强中", progress: 40, log: "扩散模型 (Diffusion) 正在绘制场景 1..." },
+    { title: "正在绘制分镜...", detail: "场景 2: 光影追踪渲染", progress: 55, log: "渲染引擎进行 HDR 调色..." },
+    { title: "正在绘制分镜...", detail: "场景 3: 动态流体计算", progress: 70, log: "AI 运动补偿技术应用中..." },
+    { title: "正在合成视频...", detail: "添加全局特效与配乐", progress: 85, log: "合成器正在进行 4K 质量输出..." },
+    { title: "生成完成！", detail: "准备播放...", progress: 100, log: "本地预览已全部就绪。" }
   ];
 
   // 事件监听
@@ -78,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     playerSection.classList.remove("active");
     inputSection.classList.add("active");
     promptInput.value = "";
+    if (playbackInterval) clearInterval(playbackInterval);
   });
 
   async function startGeneration() {
@@ -99,12 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
       progressFill.style.width = `${phase.progress}%`;
 
       const logEntry = document.createElement("div");
+      logEntry.style.marginBottom = "4px";
       logEntry.textContent = `> ${phase.log}`;
       logContainer.prepend(logEntry);
 
-      await new Promise((resolve) =>
-        setTimeout(resolve, 800 + Math.random() * 700)
-      );
+      await new Promise(resolve => setTimeout(resolve, 600 + Math.random() * 500));
     }
 
     // 生成完成后，模拟视频分镜数据
@@ -117,45 +85,50 @@ document.addEventListener("DOMContentLoaded", () => {
     startPlayback();
   }
 
-    function prepareVideoContent(prompt) {
-        // 由于生成配额限制，我们循环使用已生成的 2 张高质量场景图
-        currentScenes = [
-            { img: 'scene_1.jpg', text: '在一座永不熄灭的数字城市中...' },
-            { img: 'scene_2.jpg', text: '霓虹灯的光影在积水中破碎。' },
-            { img: 'scene_1.jpg', text: '它穿梭在钢铁的缝隙间。' },
-            { img: 'scene_2.jpg', text: '这不仅是生存，更是一场追寻。' }
-        ];
-        currentSceneIndex = 0;
-    }
+  function prepareVideoContent(prompt) {
+    // 简单的分词逻辑，使生成的字幕与输入有点关系
+    const keywords = prompt.split(/[，。！？、\s]/).filter(s => s.length > 1);
+    const mainKey = keywords[0] || "这个奇妙的世界";
+
+    currentScenes = [
+      { img: assetPool[0], text: `${mainKey}，已经不再是曾经的模样...` },
+      { img: assetPool[1], text: `在每一个光影闪烁的瞬间，都有故事在发生。` },
+      { img: assetPool[2], text: `人们追逐着数字的幻象，试图找回真实。` },
+      { img: assetPool[3], text: `而你，正是这一切的主宰。` }
+    ];
+    currentSceneIndex = 0;
+  }
 
   function startPlayback() {
+    let startTime = Date.now();
+    const sceneDuration = 4000; // 每个场景 4 秒
+    const totalDuration = currentScenes.length * sceneDuration;
+
     if (playbackInterval) clearInterval(playbackInterval);
 
-    const sceneDuration = 3000; // 每个场景 3 秒
-    const totalDuration = currentScenes.length * sceneDuration;
-    let startTime = Date.now();
+    playbackInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = (elapsed % totalDuration) / totalDuration;
+        playbackBar.style.width = `${progress * 100}%`;
 
-    const updateFrame = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = (elapsed % totalDuration) / totalDuration;
-      playbackBar.style.width = `${progress * 100}%`;
+        const currentIdx = Math.floor((elapsed % totalDuration) / sceneDuration);
+        if (currentIdx !== currentSceneIndex) {
+            currentSceneIndex = currentIdx;
+            updateScene();
+        }
+    }, 50);
 
-      const currentIdx = Math.floor((elapsed % totalDuration) / sceneDuration);
-      if (currentIdx !== currentSceneIndex) {
-        currentSceneIndex = currentIdx;
-        updateScene();
-      }
-
-      requestAnimationFrame(updateFrame);
-    };
-
-    updateScene();
-    requestAnimationFrame(updateFrame);
+    updateScene(); // 立即显示第一帧
   }
 
   function updateScene() {
     const scene = currentScenes[currentSceneIndex];
-    videoStage.style.backgroundImage = `url('${scene.img}')`;
-    videoCaption.textContent = scene.text;
+    // 使用渐变效果切换图片
+    videoStage.style.opacity = 0;
+    setTimeout(() => {
+        videoStage.style.backgroundImage = `url('${scene.img}')`;
+        videoStage.style.opacity = 1;
+        videoCaption.textContent = scene.text;
+    }, 400);
   }
 });
