@@ -3,14 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <title>我的 GitHub 启航项目</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+=======
+    <title>AI 一键生成短视频 - 演示范本</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap"
+>>>>>>> 44da954 (Initial commit of web project)
       rel="stylesheet"
     />
   </head>
   <body>
+<<<<<<< HEAD
     <div class="container">
       <header>
         <h1>你好，GitHub！<span>🚀</span></h1>
@@ -36,5 +46,93 @@
         window.location.href = "details.html";
       });
     </script>
+=======
+    <div id="app">
+      <!-- 装饰背景 -->
+      <div class="bg-glow"></div>
+      <div class="grid-overlay"></div>
+
+      <!-- 初始控制台 -->
+      <section id="input-section" class="glass-card active">
+        <header>
+          <h1>AI <span class="gradient-text">Video Gen</span></h1>
+          <p>描述你的创意，AI 将为您构建分镜、生成画面并合成短视频。</p>
+        </header>
+
+        <div class="input-group">
+          <textarea
+            id="prompt-input"
+            placeholder="例如：在霓虹闪烁的未来城市，一只像素风格的猫在天际线奔驰..."
+          ></textarea>
+          <button id="generate-btn" class="primary-btn">
+            <span>一键生成短视频</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+
+        <div class="features">
+          <div class="feature-tag">4K 超清</div>
+          <div class="feature-tag">智能分镜</div>
+          <div class="feature-tag">自动配音</div>
+        </div>
+      </section>
+
+      <!-- 模拟生成阶段 -->
+      <section id="loading-section" class="glass-card">
+        <div class="ai-brain-animation">
+          <div class="circle outer"></div>
+          <div class="circle middle"></div>
+          <div class="circle inner"></div>
+          <div class="scan-line"></div>
+        </div>
+        <div class="status-box">
+          <h2 id="status-title">正在解析剧本...</h2>
+          <div class="progress-bar">
+            <div id="progress-fill"></div>
+          </div>
+          <p id="status-detail">构建分镜中：场景 1/4...</p>
+        </div>
+        <div class="log-container" id="log-container">
+          <!-- 实时日志将在这里插入 -->
+        </div>
+      </section>
+
+      <!-- 视频播放器 -->
+      <section id="player-section">
+        <div class="mobile-frame">
+          <div class="video-container">
+            <div id="video-stage">
+              <!-- 场景将在这里动态切换 -->
+            </div>
+            <div class="caption-overlay">
+              <p id="video-caption"></p>
+            </div>
+            <!-- 播放控制/UI -->
+            <div class="player-controls">
+              <div class="author-info">
+                <div class="avatar">AI</div>
+                <span class="username">@AI_Creator</span>
+              </div>
+              <div class="interactions">
+                <div class="action">
+                  <i class="icon">❤️</i><span>1.2k</span>
+                </div>
+                <div class="action"><i class="icon">💬</i><span>256</span></div>
+                <div class="action">
+                  <i class="icon">⭐</i><span>解锁导出</span>
+                </div>
+              </div>
+            </div>
+            <div class="playback-progress">
+              <div id="playback-bar"></div>
+            </div>
+          </div>
+        </div>
+        <button id="restart-btn" class="secondary-btn">重新生成</button>
+      </section>
+    </div>
+
+    <script src="main.js"></script>
+>>>>>>> 44da954 (Initial commit of web project)
   </body>
 </html>

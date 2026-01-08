@@ -1,4 +1,5 @@
 :root {
+<<<<<<< HEAD
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --bg-color: #0f172a;
   --card-bg: rgba(30, 41, 59, 0.7);
@@ -90,6 +91,92 @@ button {
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(118, 75, 162, 0.4);
+=======
+  --primary: #00f2fe;
+  --secondary: #4facfe;
+  --accent: #f093fb;
+  --bg-dark: #0f172a;
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text: #f8fafc;
+  --font-header: "Orbitron", "Noto Sans SC", sans-serif;
+  --font-body: "Noto Sans SC", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text);
+  font-family: var(--font-body);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 装饰背景 */
+.bg-glow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(79, 172, 254, 0.15) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  filter: blur(80px);
+}
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+}
+
+#app {
+  width: 100%;
+  max-width: 1200px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* 玻璃卡片 */
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 40px;
+  width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.glass-card.active {
+  display: flex;
+  animation: fadeIn 0.5s ease-out;
+>>>>>>> 44da954 (Initial commit of web project)
 }
 
 @keyframes fadeIn {
@@ -102,3 +189,294 @@ button:hover {
     transform: translateY(0);
   }
 }
+<<<<<<< HEAD
+=======
+
+/* 输入部分 */
+h1 {
+  font-family: var(--font-header);
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+#prompt-input {
+  width: 100%;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: white;
+  padding: 16px;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#prompt-input:focus {
+  border-color: var(--primary);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.primary-btn:hover {
+  transform: scale(1.02);
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.features {
+  display: flex;
+  gap: 12px;
+}
+
+.feature-tag {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--primary);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+}
+
+/* 加载动画 */
+.ai-brain-animation {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  inset: 0;
+  animation: rotate 3s linear infinite;
+}
+
+.circle.middle {
+  inset: 15px;
+  border-color: var(--secondary);
+  animation-duration: 2s;
+  animation-direction: reverse;
+}
+.circle.inner {
+  inset: 30px;
+  border-color: var(--accent);
+  animation-duration: 1.5s;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+  animation: scan 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes scan {
+  0%,
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+#progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  transition: width 0.3s;
+}
+
+.log-container {
+  height: 100px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #64748b;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+/* 视频播放器 (抖音风格) */
+#player-section {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+#player-section.active {
+  display: flex;
+}
+
+.mobile-frame {
+  width: 320px;
+  height: calc(320px * 1.77); /* 9:16 ratio */
+  background: #000;
+  border: 8px solid #1e293b;
+  border-radius: 36px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#video-stage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.8s ease-in-out;
+}
+
+.caption-overlay {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+#video-caption {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.player-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.7rem;
+}
+
+.interactions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.icon {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.playback-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#playback-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--primary);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid var(--glass-border);
+  padding: 8px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+  color: white;
+  border-color: white;
+}
+>>>>>>> 44da954 (Initial commit of web project)
