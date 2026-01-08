@@ -49,6 +49,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (playbackInterval) clearInterval(playbackInterval);
   });
 
+  // 新增：模拟“解锁导出”按钮点击
+  const exportBtn = document.querySelector('.action:last-child');
+  if (exportBtn) {
+    exportBtn.style.cursor = 'pointer';
+    exportBtn.addEventListener('click', () => {
+      exportBtn.innerHTML = '<i class="icon">⌛</i><span>处理中...</span>';
+      setTimeout(() => {
+        alert("🎉 导出请求已发送！\n\n注意：当前为[演示范本]，导出的 MP4 视频将会在您的浏览器下载任务中模拟生成。");
+        exportBtn.innerHTML = '<i class="icon">⭐</i><span>解锁导出</span>';
+      }, 1500);
+    });
+  }
+
   async function startGeneration() {
     const prompt = promptInput.value.trim();
     if (!prompt) {
@@ -75,6 +88,14 @@ document.addEventListener("DOMContentLoaded", () => {
       await new Promise(resolve => setTimeout(resolve, 600 + Math.random() * 500));
     }
 
+    // 切换到播放器前预加载第一张图
+    const firstImg = new Image();
+    firstImg.src = assetPool[0];
+    await new Promise(resolve => {
+        firstImg.onload = resolve;
+        firstImg.onerror = resolve; // 即使加载失败也继续
+    });
+
     // 生成完成后，模拟视频分镜数据
     prepareVideoContent(prompt);
 
@@ -86,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function prepareVideoContent(prompt) {
-    // 简单的分词逻辑，使生成的字幕与输入有点关系
     const keywords = prompt.split(/[，。！？、\s]/).filter(s => s.length > 1);
     const mainKey = keywords[0] || "这个奇妙的世界";
 
@@ -101,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startPlayback() {
     let startTime = Date.now();
-    const sceneDuration = 4000; // 每个场景 4 秒
+    const sceneDuration = 4000;
     const totalDuration = currentScenes.length * sceneDuration;
 
     if (playbackInterval) clearInterval(playbackInterval);
@@ -118,17 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 50);
 
-    updateScene(); // 立即显示第一帧
+    updateScene();
   }
 
   function updateScene() {
     const scene = currentScenes[currentSceneIndex];
-    // 使用渐变效果切换图片
-    videoStage.style.opacity = 0;
-    setTimeout(() => {
-        videoStage.style.backgroundImage = `url('${scene.img}')`;
-        videoStage.style.opacity = 1;
-        videoCaption.textContent = scene.text;
-    }, 400);
+    // 强制先显示，防止黑屏
+    videoStage.style.backgroundImage = `url('${scene.img}')`;
+    videoStage.style.opacity = 1;
+    videoCaption.textContent = scene.text;
   }
 });
