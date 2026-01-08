@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情 - 我的 GitHub 启航</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .detail-item {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.6s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .detail-item:hover {
+            background: rgba(255,255,255,0.07);
+            transform: scale(1.05) translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+        /* 科技感发光边框 */
+        .detail-item::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        .detail-item:hover::after {
+            transform: translateX(100%);
+        }
+        .detail-item h3 {
+            margin-top: 0;
+            color: var(--accent);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        .back-link:hover {
+            color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* 动画序列 */
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .detail-item:nth-child(1) { animation-delay: 0.1s; }
+        .detail-item:nth-child(2) { animation-delay: 0.2s; }
+        .detail-item:nth-child(3) { animation-delay: 0.3s; }
+        .detail-item:nth-child(4) { animation-delay: 0.4s; }
+
+        /* 打字机效果 */
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid var(--accent);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 2s steps(40, end),
+                blink-caret .75s step-end infinite;
+            width: fit-content;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container slide-in">
+        <header class="typewriter">
+            <h1>项目路线图 🗺️</h1>
+            <p>我们为你规划的开发进阶之路</p>
+        </header>
+        <main>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <h3><span>🛠️</span> 搭建基础</h3>
+                    <p>利用 HTML/CSS 构建出色的响应式界面，掌握布局与美学。</p>
+                </div>
+                <div class="detail-item">
+                    <h3><span>JS</span> 交互逻辑</h3>
+                    <p>使用 Javascript 增加动态效果、异步请求和复杂的业务逻辑。</p>
+                </div>
+                <div class="detail-item">
+                    <h3><span>📦</span> 版本控制</h3>
+                    <p>通过 Git 记录历程，使用 GitHub 进行全球范围的代码协作。</p>
+                </div>
+                <div class="detail-item">
+                    <h3><span>🚀</span> 自动化部署</h3>
+                    <p>配置 CI/CD 流程，实现代码提交即实时上线。</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-link">← 返回主页</a>
+        </main>
+    </div>
+</body>
+</html>

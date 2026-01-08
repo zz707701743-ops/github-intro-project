@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的 GitHub 启航项目</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>你好，GitHub！<span>🚀</span></h1>
+        <p>这是我与 Antigravity 协作生成的第一个项目。</p>
+      </header>
+      <main>
+        <section class="card">
+          <h2>项目状态</h2>
+          <ul id="status-list">
+            <li><span class="icon">✅</span> 本地工作区已就绪</li>
+            <li><span class="icon">✅</span> Git 已初始化</li>
+            <li><span class="icon">⏳</span> 等待推送到 GitHub</li>
+          </ul>
+        </section>
+        <button id="cta-btn">了解更多</button>
+      </main>
+      <footer>
+        <p>© 2026 zz707701743-ops</p>
+      </footer>
+    </div>
+    <script>
+      document.getElementById("cta-btn").addEventListener("click", () => {
+        window.location.href = "details.html";
+      });
+    </script>
+  </body>
+</html>
